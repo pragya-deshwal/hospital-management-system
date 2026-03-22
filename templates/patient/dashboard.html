@@ -1,0 +1,67 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<h2 class="mb-4 text-center">Welcome, {{ patient.name }}</h2>
+
+<h4 class="mt-4">Upcoming Appointments</h4>
+{% if upcoming %}
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Doctor</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for a in upcoming %}
+        <tr>
+            <td>{{ a.doctor_name }}</td>
+            <td>{{ a.date }}</td>
+            <td>{{ a.time }}</td>
+            <td>{{ a.status or 'Booked' }}</td>
+            <td>
+                <a href="{{ url_for('patient.edit_appointment', apt_id=a.id) }}" class="btn btn-sm btn-primary">Edit</a>
+                <a href="{{ url_for('patient.cancel', apt_id=a.id) }}" class="btn btn-sm btn-danger">Cancel</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p>No upcoming appointments.</p>
+{% endif %}
+
+<h4 class="mt-4">Past Appointments</h4>
+{% if past %}
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Doctor</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Diagnosis</th>
+            <th>Prescription</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for a in past %}
+        <tr>
+            <td>{{ a.doctor_name }}</td>
+            <td>{{ a.date }}</td>
+            <td>{{ a.time }}</td>
+            <td>{{ a.diagnosis or 'N/A' }}</td>
+            <td>{{ a.prescription or 'N/A' }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p>No past appointments found.</p>
+{% endif %}
+
+<a href="{{ url_for('patient.search') }}" class="btn btn-success mt-3">Book New Appointment</a>
+
+{% endblock %}

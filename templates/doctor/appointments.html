@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<h2 class="mb-4">All Appointments — {{ doctor.name }}</h2>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Patient</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for a in appointments %}
+        <tr>
+            <td>{{ a.id }}</td>
+            <td>{{ a.patient_name }}</td>
+            <td>{{ a.date }}</td>
+            <td>{{ a.time }}</td>
+            <td>{{ a.status }}</td>
+
+            <td>
+                <a 
+                    href="{{ url_for('doctor.appointment_details', appointment_id=a.id) }}"
+                    class="btn btn-sm btn-primary"
+                >
+                    View
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

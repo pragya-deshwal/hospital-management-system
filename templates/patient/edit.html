@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<h2 class="mb-4 text-center">Edit Appointment #{{ apt.id }}</h2>
+<p><strong>Doctor:</strong> {{ apt.doctor_name }}</p>
+<p><strong>Current Date:</strong> {{ apt.date }} | <strong>Time:</strong> {{ apt.time }}</p>
+
+<form method="POST" class="mx-auto" style="max-width: 400px;">
+    <div class="mb-3">
+        <label class="form-label">New Date</label>
+        <input type="date" name="date" class="form-control" required value="{{ apt.date }}">
+    </div>
+    <div class="mb-3">
+        <label class="form-label">New Time</label>
+        <input type="time" name="time" class="form-control" required value="{{ apt.time }}">
+    </div>
+    <button class="btn btn-primary w-100 mt-2">Update Appointment</button>
+</form>
+
+<a href="{{ url_for('patient.dashboard') }}" class="btn btn-secondary mt-3">Back to Dashboard</a>
+
+{% endblock %}

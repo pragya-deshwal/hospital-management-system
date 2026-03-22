@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+{% block content %}
+<h2>Patient History — {{ patient.name }} (Admin)</h2>
+
+<table class="table table-bordered">
+  <thead>
+    <tr><th>Appointment ID</th><th>Date</th><th>Time</th><th>Doctor</th><th>Status</th><th>Diagnosis</th><th>Prescription</th><th>Notes</th></tr>
+  </thead>
+  <tbody>
+    {% for h in history %}
+    <tr>
+      <td>{{ h.appointment_id }}</td>
+      <td>{{ h.date }}</td>
+      <td>{{ h.time }}</td>
+      <td>{{ h.doctor_name or "-" }}</td>
+      <td>{{ h.status }}</td>
+      <td>{{ h.diagnosis or "-" }}</td>
+      <td>{{ h.prescription or "-" }}</td>
+      <td>{{ h.notes or "-" }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<a href="{{ url_for('admin.patients_list') }}" class="btn btn-secondary">Back</a>
+{% endblock %}

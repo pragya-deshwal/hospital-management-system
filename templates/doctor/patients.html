@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<h2 class="mb-4">Patients Under Your Care — {{ doctor.name }}</h2>
+
+{% if patients %}
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Gender</th>
+            <th>Contact</th>
+            <th>View History</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for p in patients %}
+        <tr>
+            <td>{{ p.name }}</td>
+            <td>{{ p.age }}</td>
+            <td>{{ p.gender }}</td>
+            <td>{{ p.contact }}</td>
+            <td>
+                <a 
+                    class="btn btn-sm btn-outline-secondary"
+                    href="{{ url_for('doctor.patient_history', patient_id=p.id) }}"
+                >
+                    Open
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% else %}
+<p class="text-muted">No patient records have been assigned yet.</p>
+{% endif %}
+
+<a 
+    href="{{ url_for('doctor.dashboard') }}" 
+    class="btn btn-secondary mt-3"
+>
+    Back to Dashboard
+</a>
+
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<h2 class="mb-4">Admin Dashboard</h2>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="card shadow-sm p-3 text-center">
+            <h4>Total Doctors</h4>
+            <p class="display-6">{{ doctor_count }}</p>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card shadow-sm p-3 text-center">
+            <h4>Total Patients</h4>
+            <p class="display-6">{{ patient_count }}</p>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card shadow-sm p-3 text-center">
+            <h4>Total Appointments</h4>
+            <p class="display-6">{{ appointment_count }}</p>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

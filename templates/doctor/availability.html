@@ -1,0 +1,47 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<h2 class="mb-3">Availability Settings — {{ doctor.name }}</h2>
+
+<p class="mb-2">Your current availability:</p>
+
+<pre class="p-3" style="background:#f8f9fa; border-radius:6px;">
+{{ doctor.availability or "No availability has been added yet." }}
+</pre>
+
+<hr>
+
+<form method="POST" class="mt-3" style="max-width: 600px;">
+    <label class="form-label">
+        Edit Availability (add your schedule for the coming week)
+    </label>
+
+    <textarea 
+        name="availability" 
+        class="form-control" 
+        rows="5"
+        placeholder="Example: Mon 10:00–13:00, Tue 14:00–17:00, Wed 9:00–12:00..."
+    >{{ doctor.availability }}</textarea>
+
+    <button class="btn btn-primary mt-3">
+        Update Availability
+    </button>
+</form>
+
+<hr class="mt-4">
+
+<h5>Next 7 Days</h5>
+<ul class="mt-2">
+    {% for d in next_seven %}
+        <li>{{ d }}</li>
+    {% endfor %}
+</ul>
+
+<a 
+    href="{{ url_for('doctor.dashboard') }}" 
+    class="btn btn-secondary mt-3"
+>
+    Back to Dashboard
+</a>
+
+{% endblock %}

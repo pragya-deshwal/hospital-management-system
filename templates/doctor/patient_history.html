@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<h2>Patient Treatment Record — {{ patient.name }}</h2>
+<p>Contact Details: {{ patient.contact or "N/A" }}</p>
+
+{% if histories %}
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>Visit Date</th>
+      <th>Doctor</th>
+      <th>Diagnosis</th>
+      <th>Prescription</th>
+      <th>Remarks</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    {% for h in histories %}
+    <tr>
+      <td>
+        {{ h.visit_date or "N/A" }}
+        {% if h.visit_time %} — {{ h.visit_time }} {% endif %}
+      </td>
+
+      <td>{{ h.doctor_name or "N/A" }}</td>
+      <td>{{ h.diagnosis or "No data" }}</td>
+      <td>{{ h.prescription or "Not provided" }}</td>
+      <td>{{ h.notes or "No notes" }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% else %}
+<p>No previous medical records are available for this patient.</p>
+{% endif %}
+
+<a href="{{ url_for('doctor.doctor_patients') }}" class="btn btn-secondary mt-3">Back to Patient List</a>
+
+{% endblock %}

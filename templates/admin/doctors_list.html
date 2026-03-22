@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<h2>Doctors List</h2>
+<hr>
+
+<!-- Flash Messages -->
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, msg in messages %}
+      <div class="alert alert-{{ category }}">{{ msg }}</div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+
+<!-- Add Doctor Button -->
+<a href="{{ url_for('admin.add_doctor') }}" class="btn btn-primary mb-3">Add Doctor</a>
+
+<table class="table table-bordered table-striped">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Specialization</th>
+        <th>Availability</th>
+        <th>Actions</th>
+    </tr>
+
+    {% for d in doctors %}
+    <tr>
+        <td>{{ d.id }}</td>
+        <td>{{ d.name }}</td>
+        <td>{{ d.specialization }}</td>
+        <td>{{ d.availability }}</td>
+        <td>
+            <a href="{{ url_for('admin.edit_doctor', doctor_id=d.id) }}" class="btn btn-warning btn-sm">Edit</a>
+            <a href="{{ url_for('admin.delete_doctor', doctor_id=d.id) }}" class="btn btn-danger btn-sm">Delete</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

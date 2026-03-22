@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<h2>All Appointments</h2>
+<hr>
+
+<!-- Flash Messages -->
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, msg in messages %}
+      <div class="alert alert-{{ category }} mt-2">
+        {{ msg }}
+      </div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+
+<table class="table table-bordered mt-3">
+
+    <tr>
+        <th>ID</th>
+        <th>Patient</th>
+        <th>Doctor</th>
+        <th>Date</th>
+        <th>Time</th>
+        <th>Status</th>
+    </tr>
+
+    {% for a in appointments %}
+    <tr>
+        <td>{{ a.id }}</td>
+        <td>{{ a.patient_name }}</td>
+        <td>{{ a.doctor_name }}</td>
+        <td>{{ a.date }}</td>
+        <td>{{ a.time }}</td>
+        <td>{{ a.status }}</td>
+    </tr>
+    {% endfor %}
+
+</table>
+
+{% endblock %}

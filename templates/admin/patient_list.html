@@ -1,0 +1,47 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<h2>Patients List / Search</h2>
+<hr>
+
+<!-- Flash Messages -->
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, msg in messages %}
+      <div class="alert alert-{{ category }} mt-2">
+        {{ msg }}
+      </div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+
+<form method="POST" class="mb-4 w-50">
+    <input 
+        type="text" 
+        class="form-control" 
+        name="search" 
+        placeholder="Search by name, contact, or ID"
+    >
+</form>
+
+<table class="table table-bordered">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Gender</th>
+        <th>Contact</th>
+    </tr>
+
+    {% for p in patients %}
+    <tr>
+        <td>{{ p.id }}</td>
+        <td>{{ p.name }}</td>
+        <td>{{ p.age }}</td>
+        <td>{{ p.gender }}</td>
+        <td>{{ p.contact }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

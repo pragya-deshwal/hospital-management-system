@@ -1,0 +1,47 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<h2 class="mb-4 text-center">Find a Doctor</h2>
+
+<form method="POST" class="mx-auto mb-4" style="max-width: 450px;">
+    <div class="mb-3">
+        <label class="form-label">Doctor Name</label>
+        <input type="text" name="name" class="form-control" placeholder="Enter doctor's name">
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Specialization</label>
+        <input type="text" name="specialization" class="form-control" placeholder="E.g. Cardiology, Neurology">
+    </div>
+    <button class="btn btn-primary w-100">Search</button>
+</form>
+
+{% if doctors %}
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Specialization</th>
+            <th>Availability</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for d in doctors %}
+        <tr>
+            <td>{{ d.name }}</td>
+            <td>{{ d.specialization }}</td>
+            <td>{{ d.availability or "Not set" }}</td>
+            <td>
+                <a href="{{ url_for('patient.book_appointment', doctor_id=d.id) }}" class="btn btn-sm btn-success">Book</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p>No doctors found. Try a different search.</p>
+{% endif %}
+
+<a href="{{ url_for('patient.dashboard') }}" class="btn btn-secondary mt-3">Back to Dashboard</a>
+
+{% endblock %}

@@ -1,0 +1,88 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<h2 class="mb-3">Appointment Details — #{{ apt.id }}</h2>
+
+<p>
+    <strong>Patient:</strong> {{ apt.patient_name }}
+    (Age: {{ apt.patient_age }}, Gender: {{ apt.patient_gender }})
+</p>
+
+<p>
+    <strong>Date:</strong> {{ apt.date }}
+    | 
+    <strong>Time:</strong> {{ apt.time }}
+</p>
+
+<p><strong>Status:</strong> {{ apt.status }}</p>
+
+<hr>
+
+{% if treatment %}
+    <h5 class="mt-3">Recorded Treatment</h5>
+
+    <p><strong>Diagnosis:</strong> {{ treatment.diagnosis }}</p>
+    <p><strong>Prescription:</strong> {{ treatment.prescription }}</p>
+    <p><strong>Notes:</strong> {{ treatment.notes }}</p>
+
+    <hr>
+{% endif %}
+
+<h4 class="mt-4">Update / Add Treatment & Complete Appointment</h4>
+
+<form method="POST" class="mt-3 mb-4">
+
+    <div class="mb-3">
+        <label class="form-label">Diagnosis</label>
+        <textarea 
+            class="form-control" 
+            name="diagnosis" 
+            rows="2"
+        >{{ treatment.diagnosis if treatment else '' }}</textarea>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Prescription</label>
+        <textarea 
+            class="form-control" 
+            name="prescription" 
+            rows="2"
+        >{{ treatment.prescription if treatment else '' }}</textarea>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Notes</label>
+        <textarea 
+            class="form-control" 
+            name="notes" 
+            rows="2"
+        >{{ treatment.notes if treatment else '' }}</textarea>
+    </div>
+
+    <button 
+        class="btn btn-success me-2" 
+        type="submit" 
+        name="action" 
+        value="complete"
+    >
+        Save & Mark Completed
+    </button>
+
+    <button 
+        class="btn btn-danger" 
+        type="submit" 
+        name="action" 
+        value="cancel"
+    >
+        Cancel Appointment
+    </button>
+</form>
+
+<a 
+    href="{{ url_for('doctor.appointments_list') }}" 
+    class="btn btn-secondary"
+>
+    Back to Appointments
+</a>
+
+{% endblock %}

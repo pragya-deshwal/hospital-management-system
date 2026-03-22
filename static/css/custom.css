@@ -1,0 +1,14 @@
+/* Improve card spacing */
+.card {
+    border-radius: 10px;
+}
+
+/* Mobile table scroll */
+.table-responsive {
+    overflow-x: auto;
+}
+
+/* Minor spacing improvements */
+body {
+    background-color: #f7f9fc;
+}

@@ -1,0 +1,39 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <div class="container-fluid">
+
+    <a class="navbar-brand" href="/">HMS</a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+
+      <ul class="navbar-nav ms-auto">
+
+        {% if session.get('role') == 'admin' %}
+            <li class="nav-item"><a class="nav-link" href="/admin/dashboard">Dashboard</a></li>
+            <li class="nav-item"><a class="nav-link" href="/admin/doctors">Doctors</a></li>
+            <li class="nav-item"><a class="nav-link" href="/admin/patients">Patients</a></li>
+            <li class="nav-item"><a class="nav-link" href="/admin/appointments">Appointments</a></li>
+
+        {% elif session.get('role') == 'doctor' %}
+            <li class="nav-item"><a class="nav-link" href="/doctor/dashboard">Dashboard</a></li>
+            <li class="nav-item"><a class="nav-link" href="/doctor/appointments">Appointments</a></li>
+
+        {% elif session.get('role') == 'patient' %}
+            <li class="nav-item"><a class="nav-link" href="/patient/dashboard">Dashboard</a></li>
+            <li class="nav-item"><a class="nav-link" href="/patient/search">Find Doctor</a></li>
+
+        {% endif %}
+
+        {% if session.get('user_ref') %}
+            <li class="nav-item"><a class="nav-link text-warning fw-bold" href="/logout">Logout</a></li>
+        {% else %}
+            <li class="nav-item"><a class="nav-link" href="/login">Login</a></li>
+        {% endif %}
+      </ul>
+
+    </div>
+  </div>
+</nav>

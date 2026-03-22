@@ -1,0 +1,74 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<h2 class="text-center mb-4">Add New Doctor</h2>
+<hr>
+
+<form method="POST" class="mx-auto" style="max-width: 500px;">
+
+    <div class="mb-3">
+        <label class="form-label">Department</label>
+        <select name="department_id" class="form-control" required>
+            <option value="" disabled selected>Select Department</option>
+            {% for dept in departments %}
+                <option value="{{ dept.id }}">{{ dept.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+
+    <div class="mb-3">
+        <label class="form-label">Doctor Name</label>
+        <input 
+            type="text" 
+            name="name" 
+            class="form-control" 
+            required
+        >
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Specialization</label>
+        <input 
+            type="text" 
+            name="specialization" 
+            class="form-control" 
+            required
+        >
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Availability</label>
+        <input 
+            type="text" 
+            name="availability" 
+            class="form-control"
+        >
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Username (Login)</label>
+        <input 
+            type="text" 
+            name="username" 
+            class="form-control" 
+            required
+        >
+    </div>
+
+
+    <div class="mb-3">
+        <label class="form-label">Password</label>
+        <input 
+            type="password" 
+            name="password" 
+            class="form-control" 
+            required
+        >
+    </div>
+
+    <button class="btn btn-success w-100 mt-3">Add Doctor</button>
+
+</form>
+
+{% endblock %}
